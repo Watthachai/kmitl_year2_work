@@ -1,0 +1,17 @@
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+.rounded {
+    border-radius: 10px;
+}
+
+.bg-body-tertiary {
+    --bs--bg-opacity: 1;
+    background-color: rgb(240, 240, 240);
+}
+
+hr {
+    margin-top: 3% !important;
+    margin-bottom: 3% !important;
+}
