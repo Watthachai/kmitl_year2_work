@@ -2,8 +2,8 @@
     font-family: 'Kanit', sans-serif;
 }
 
-.rounded {
-    border-radius: 10px;
+.rounded-x {
+    border-radius: 1.5rem!important;
 }
 
 .bg-body-tertiary {
