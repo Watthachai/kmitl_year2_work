@@ -3,7 +3,7 @@
 }
 
 .rounded-x {
-    border-radius: 1.5rem!important;
+    border-radius: 1rem!important;
 }
 
 .bg-body-tertiary {
@@ -14,4 +14,9 @@
 hr {
     margin-top: 3% !important;
     margin-bottom: 3% !important;
+}
+
+.img-thumbnail {
+    padding: 0 !important;
+    
 }
