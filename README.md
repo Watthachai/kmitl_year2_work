@@ -1,1 +1,3 @@
-# kmitl_year2_work
+# kmitl_year2_word
+
+Hello world

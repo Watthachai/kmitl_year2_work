@@ -178,9 +178,11 @@ for i in "ABCD":
     
 # Pop_left
 while not ts.isEmpty():
-    print(ts.left_pop()) 
+    for i in ts.items:
+        print(i, end="")
+    print(' Remove :', ts.left_pop()) 
 
-print("################ 2 #################")
+print("\n################ 2 #################")
 
 #Push_right
 for i in "ABCD":
@@ -189,9 +191,11 @@ for i in "ABCD":
 
 #Pop_right
 while not ts.isEmpty():
-    print(ts.right_pop())
+    for i in ts.items:
+        print(i, end='')
+    print(' Remove :', ts.right_pop())
     
-print("################ 3 #################")
+print("\n################ 3 #################")
 
 # Push_left
 for i in "ABCD":
@@ -200,9 +204,11 @@ for i in "ABCD":
 
 #Pop_right
 while not ts.isEmpty():
-    print(ts.right_pop())
+    for i in ts.items:
+        print(i, end='')
+    print(' Remove :',ts.right_pop())
     
-print("################ 4 #################")
+print("\n################ 4 #################")
 
 #Push_right
 for i in "ABCD":
@@ -211,4 +217,80 @@ for i in "ABCD":
 
 # Pop_left
 while not ts.isEmpty():
-    print(ts.left_pop()) 
+    for i in ts.items:
+        print(i, end='')
+    print(' Remove :', ts.left_pop()) 
+
+
+class DLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append_primary(self, pri_data):
+        new_node = priNode(pri_data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current_node = self.head
+            while current_node.next is not None:
+                current_node = current_node.next
+            current_node.next = new_node
+
+    def delete_primary(self, pri_data):
+        current_node = self.head
+        previous_node = None
+        while current_node is not None:
+            if current_node.data == pri_data:
+                if previous_node is None:
+                    self.head = current_node.next
+                else:
+                    previous_node.next = current_node.next
+                break
+            previous_node = current_node
+            current_node = current_node.next
+
+    def append_secondary(self, pri_data, sec_data):
+        current_node = self.head
+        while current_node is not None:
+            if current_node.data == pri_data:
+                current_node.sec_list.append(sec_data)
+                break
+            current_node = current_node.next
+
+    def delete_secondary(self, pri_data, sec_data):
+        current_node = self.head
+        previous_node = None
+        while current_node is not None:
+            if current_node.data == pri_data:
+                current_node.sec_list.remove(sec_data)
+                break
+            previous_node = current_node
+            current_node = current_node.next
+
+    def print_list(self):
+        current_node = self.head
+        while current_node is not None:
+            print(current_node.data, ': ', current_node.sec_list)
+            current_node = current_node.next
+
+
+class priNode:
+    def __init__(self, pri_data):
+        self.data = pri_data
+        self.sec_list = []
+        self.next = None
+
+
+class secNode:
+    def __init__(self, sec_data):
+        self.data = sec_data
+
+list = DLinkedList()
+list.append_primary('A')
+list.append_primary('B')
+list.append_secondary('A', 'A1')
+list.append_secondary('A', 'A2')
+list.append_secondary('B', 'B1')
+list.append_secondary('B', 'B2')
+
+list.print_list()
