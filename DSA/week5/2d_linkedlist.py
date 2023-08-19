@@ -135,7 +135,6 @@ class Node:
                 break
             previous_node = current_node
             current_node = current_node.next
-            
     
     def print_list(self):
         current_node = self.head
@@ -165,7 +164,7 @@ ll.Append_secondary('B', 'B1')
 ll.Append_secondary('B', 'B2')
 ll.Append_secondary('C', 'C1')
 ll.Append_secondary('C', 'C2')
-
+ll.Delete_primary('B')
 
 
 ll.print_list()
