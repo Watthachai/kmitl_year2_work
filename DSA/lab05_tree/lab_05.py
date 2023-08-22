@@ -19,6 +19,27 @@ class Node:
                     
             else: 
                 self.data = data
+                
+    def inOrder(self):
+        if self.left:
+            self.left.inOrder()
+        print(self.data, end=" ")
+        if self.right:
+            self.right.inOrder()
+
+    def preOrder(self):
+        print(self.data, end=" ")
+        if self.left:
+            self.left.preOrder()
+        if self.right:
+            self.right.preOrder()
+
+    def postOrder(self):
+        if self.left:
+            self.left.postOrder()
+        if self.right:
+            self.right.postOrder()
+        print(self.data, end=" ")
 
     def PrintTree(self):
         if self.left:
@@ -41,4 +62,14 @@ root.insert(34)
 root.insert(19)
 root.insert(2)
 
-root.PrintTree()
+
+print("Inorder traversal:")
+root.inOrder()
+print()
+
+print("Preorder traversal:")
+root.preOrder()
+print()
+
+print("Postorder traversal:")
+root.postOrder()
