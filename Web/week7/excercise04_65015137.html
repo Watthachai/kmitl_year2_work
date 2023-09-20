@@ -11,7 +11,7 @@
 
           // Create button
           var button = document.createElement("button");
-          button.textContent = "Click me to display date and Time with web worker api";
+          button.textContent = "Click me to display date and Time";
           button.style.marginTop = "20px"; // Add a bottom margin to the button
 
           // Create a new Web Worker
@@ -22,7 +22,8 @@
 
           // Variables to save the last time text and color
           var lastTimeText;
-          var lastColor;
+          var lastTextColor;
+          var lastBGColor;
 
           // Add an event listener to the button
           button.addEventListener("click", function() {
@@ -38,10 +39,12 @@
                       button.textContent = event.data.time;
                       // Update the button text color with the color from the worker
                       button.style.backgroundColor = event.data.color;
+                      button.style.color = event.data.textcolor
 
                       // Save the last time text and color
                       lastTimeText = event.data.time;
-                      lastColor = event.data.color;
+                      lastBGColor = event.data.color;
+                      lastTextColor = event.data.textcolor;
                   };
 
                   // Move the button to the top right of the screen
@@ -61,7 +64,8 @@
 
                   // Reset the button text to the last time text and color to the last color
                   button.textContent = lastTimeText;
-                  button.style.backgroundColor = lastColor;
+                  button.style.backgroundColor = lastBGColor;
+                  button.style.color = lastTextColor;
 
                   // Move the button back to its original position
                   button.style.position = "static";
