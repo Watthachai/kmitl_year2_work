@@ -9,9 +9,6 @@ def clear():
     if name == 'nt':
         # If run on Windows
         system('cls')
-    else:
-        # If run on Linux
-        system('clear')
 
 
 # Below are defined 6 lists of 6 strings which are displayed in game symbols
@@ -250,11 +247,14 @@ def welcome():
                '\t  ##         ##         ##',
                '\t  ##         ##         ##',
                '\n\n'
-               '\t#### ###  #  #  # ##### ####',
-               '\t#    #  # #  #  #   #   #  ',
-               '\t###  ###  #  #  #   #   ####',
-               '\t#    #  # #  #  #   #      #',
-               '\t#    #  # ####  #   #   ####']
+               '\t#### #    ##### ##### ',
+               '\t#    #    #   #   #   ',
+               '\t#### #    #   #   #   ',
+               '\t   # #    #   #   #   ',
+               '\t#### #### #####   #   ']
+    
+    
+    
     for c in welcome:
         print(c)
         time.sleep(0.1)
