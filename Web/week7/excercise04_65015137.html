@@ -9,12 +9,10 @@
           header.textContent = "Exercise 04: JavaScript&DOM";
           maincontainer.appendChild(header);
 
-          // Create button
           var button = document.createElement("button");
           button.textContent = "Click me to display date and Time";
-          button.style.marginTop = "20px"; // Add a bottom margin to the button
+          button.style.marginTop = "0px"; // Add a bottom margin to the button
 
-          // Create a new Web Worker
           var worker = new Worker('worker.js');
 
           // Flag to track whether the button has been clicked
@@ -28,7 +26,6 @@
           // Add an event listener to the button
           button.addEventListener("click", function() {
               if (!isClicked) {
-                  // If the button has not been clicked yet, start updating the time and move the button
 
                   // Post a message to the worker
                   worker.postMessage('getDate');
@@ -55,9 +52,7 @@
                   // Set the flag to true
                   isClicked = true;
               } else {
-                  // If the button has already been clicked, stop updating the time and move the button back
 
-                  // Terminate the worker
                   worker.terminate();
                   // Create a new worker for next time
                   worker = new Worker('worker.js');
