@@ -47,29 +47,41 @@ class Cash:
             self.credit -= self.bet
             return False
         else:
-            print('\n\t     Not enough credit to place a bet')
+            print('\n\t     Not enough credit to place a bet press "a" to add money!')
             time.sleep(2)
             return True
 
 class SlotMachine:
     def __init__(self, slot_one, slot_two, slot_three):
         self.reels = [slot_one, slot_two, slot_three]
+        self.loss_count = 0  # Add a counter for losses
 
     def spin(self):
-        #clear()
-        return [random.choices(reel, k=1)[0] for reel in self.reels]
+        if  self.loss_count >= random.randint(3,10):
+            # If there have been 3 in 10 losses, force a win by choosing the same symbol for all reels
+            symbol = random.choices(self.reels[0], k=1)[0]
+            return [symbol, symbol, symbol]
+        else:
+            # Otherwise, spin normally
+            return [random.choices(reel, k=1)[0] for reel in self.reels]
 
     def play(self, cash):
+        clear()
         result = self.spin()
         print("Result: ", [res[0] for res in result])
         if len(set([res[0] for res in result])) == 1:
             symbol = result[0][0]
             multiplier = result[0][1]
-            win_amount = multiplier
-            print(f"Congratulations! You won ${win_amount * multiplier}!")
-            cash.credit += win_amount * multiplier
+            win_amount = cash.bet * multiplier  # Calculate win amount based on bet and multiplier
+            print(f"Congratulations! You won ${win_amount}!")
+            cash.credit += win_amount
+            self.loss_count = 0  # Reset the loss counter after a win
         else:
             print("Sorry, you lost. Try again!")
+            self.loss_count += 1  # Increment the loss counter after a loss
+
+
+
             
 # Define the symbols and multipliers
 strawberry = ("🍓", 2)
@@ -80,15 +92,15 @@ orange = ("🍊", 8)
 seven = ("💎", 15)
 
 # Define the probabilities for each symbol
-probabilities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]
+probabilities = [10, 6, 5, 3, 2, 1]
 symbols = [strawberry, plum, raspberry, orange, banana, seven]
 slot_one = random.choices(symbols, weights=probabilities, k=100)
 
-probabilities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]
+probabilities = [10, 6, 5, 3, 2, 1]
 symbols = [strawberry, plum, raspberry, orange, banana, seven]
 slot_two = random.choices(symbols, weights=probabilities, k=100)
 
-probabilities = [0.8, 0.6, 0.5, 0.3, 0.2, 0.1]
+probabilities = [10, 6, 5, 3, 2, 1]
 symbols = [strawberry, plum, raspberry, orange, banana, seven]
 slot_three = random.choices(symbols, weights=probabilities, k=100)
 
@@ -124,12 +136,15 @@ if __name__ == '__main__':
     
     while True:
         print(f"\nCurrent Bet: {cash.bet}, Current Credit: {cash.credit}")
-        again = input("\nPress 'q' to quit or 'b' to change bet or any other key to spin: ")
+        again = input("\nPress 'q' to quit or 'b' to change bet or 'a' to add money or any other key to spin: ")
         if again == 'q':
-            
             break
         elif again == 'b':
             cash.change_bet()
+        elif again == 'a':
+            amount = int(input("Enter the amount of money you want to add: "))
+            cash.credit += amount
+            print(f"You added ${amount}. Your new credit is ${cash.credit}.")
         else:
             if not cash.charge():
                 slot_machine.play(cash)
