@@ -38,3 +38,37 @@ def shuffle(string1, string2):
 st1 = "abcdefghhhhhhhhhhhhh"
 st2 = "ABCDEFGasssssssssssssssdasdw"
 print(shuffle(st1, st2))  # aAbBcCdDeEfFgG
+
+
+
+
+############ข้อ 1 #################
+class Queue:
+    def __init__(self):
+        self.items1 = []
+        self.items2 =[]
+
+    def is_empty(self):
+        return len(self.items1) == 0 and len(self.items2) == 0
+
+    def enqueue(self, item1,item2):
+        for i in item1:
+            self.items1.append(i)
+        for n in item2:
+            self.items2.append(n)
+        
+    def dequeue(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+
+    def size(self):
+        return len(self.items)
+
+    def shuffle(self):
+        stack = ""
+        if not self.is_empty():
+            for i in range(len(self.items1)):
+                stack += self.items1[i] + self.items2[i]
+            return stack
+        else:
+            return None
