@@ -1,37 +1,50 @@
 """
 Program 1:
 ให้นักศึกษาเขียนโปรแกรม สร้าง Class Queue และรับ input เป็น string แล้วทำการสลับตำแหน่งตัวอักษร
-แบบกรีดไพ่ โดยใช้ Queue 2 Queue
+แบบกรีดไพ่ โดยใช้ Queue
 ตัวอย่าง
 Input: ABCDEFGH
 Output : AEBFCGDH
 """
+class Queue:
+    def __init__(self):
+        self.items = []
 
-#Program 1
-import queue
+    def is_empty(self):
+        return not bool(self.items)
 
-class QueueString:
-    def __init__(self, string):
-        self.q1 = queue.Queue()
-        self.q2 = queue.Queue()
-        for char in string:
-            self.q1.put(char)
+    def enqueue(self, data):
+        self.items.append(data)
 
-    def shuffle(self):
-        result = ''
-        while not self.q1.empty():
-            result += self.q1.get()  # Take one character from the front of q1
-            if not self.q1.empty():  # If there are still characters left in q1
-                self.q2.put(self.q1.get())  # Take the next character from q1 and put it in q2
-        while not self.q2.empty():
-            result += self.q2.get()  # Take all remaining characters from q2
-        return result
+    def dequeue(self):
+        return self.items.pop(0)
 
-# Test the class
-q = QueueString('ABCDEFGH')
-print(q.shuffle())  # Output: AEBFCGDH
+def shuffle_string(s):
+    q1 = Queue()
+    q2 = Queue()
 
+    # แบ่ง string เป็นสองส่วน
+    for i in range(len(s)):
+        if i < len(s) / 2:
+            q1.enqueue(s[i])
+        else:
+            q2.enqueue(s[i])
 
+    # ผสมสองส่วนของ string
+    result = ''
+    while not q1.is_empty() and not q2.is_empty():
+        result += q1.dequeue()
+        result += q2.dequeue()
+
+    # เพิ่มตัวอักษรที่เหลือใน queue
+    while not q1.is_empty():
+        result += q1.dequeue()
+    while not q2.is_empty():
+        result += q2.dequeue()
+
+    return result
+str_input = input("Input string: ")
+print(shuffle_string(str_input))
 
 """
 Program 2:
@@ -67,28 +80,36 @@ def is_balanced(expression):
             s.pop()
     return s.is_empty()
 
-
-print(is_balanced("(1+(2-3))"))
-print(is_balanced("1+(2*3)-4)"))  
+str_input = input("Input expression: ")
+print(is_balanced(str_input)) 
 
 
 
 """
 Program 3:
-เขียนโปรแกรมรับ input เป็น string และ keyword แล้วหาตำแหน่งของ Keyword ใน string ถ้าไม่พบให้ แสดงผล -1
+เขียนโปรแกรมรับ input เป็น string และ keyword แล้วหาตำแหน่งของ Keyword ใน string ถ้าไม่พบให้ แสดงผล -1 โดยไม่ใช้ฟังก์ชัน find
 Input string : hello world
 Input Keyword: world
 Output : 6
 Input string : hello world
 Input Keyword: word
-Output: -1
+Output: -1 
 """
+def find_keyword(s, keyword):
+    len_s = len(s)
+    len_keyword = len(keyword)
+
+    for i in range(len_s - len_keyword + 1):
+        if s[i:i+len_keyword] == keyword:
+            return i
+
+    return -1
+
+print(find_keyword('hello world', 'world'))
+print(find_keyword('hello world', 'word')) 
 
 input_string = input("Input string: ")
-keyword = input("Input Keyword: ")
+input_keyword = input("Input keyword: ")
+result = find_keyword(f'{input_string}', f'{input_keyword}')
+print(result)
 
-position = input_string.find(keyword)
-if position == -1:
-    print("Output: -1")
-else:
-    print("Output:", position)
