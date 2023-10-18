@@ -56,13 +56,6 @@ class Stack:
     def pop(self):
         return self.items.pop()
 
-    def peek(self):
-        return self.items[len(self.items)-1]
-
-    def size(self):
-        return len(self.items)
-
-
 def is_balanced(expression):
     s = Stack()
     for char in expression:
@@ -75,9 +68,8 @@ def is_balanced(expression):
     return s.is_empty()
 
 
-# Test the function
-print(is_balanced("(1+(2-3))"))  # Should print: True
-print(is_balanced("1+(2*3)-4)"))  # Should print: False
+print(is_balanced("(1+(2-3))"))
+print(is_balanced("1+(2*3)-4)"))  
 
 
 
@@ -91,3 +83,12 @@ Input string : hello world
 Input Keyword: word
 Output: -1
 """
+
+input_string = input("Input string: ")
+keyword = input("Input Keyword: ")
+
+position = input_string.find(keyword)
+if position == -1:
+    print("Output: -1")
+else:
+    print("Output:", position)
