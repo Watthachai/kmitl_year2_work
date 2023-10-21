@@ -1,3 +1,12 @@
+*{
+    font-size:1rem;
+}
+html {
+    font-size: calc(60% + 0.8vnim);
+
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -21,6 +30,7 @@ header {
         width: 120px;
         height: 100px;
     }
+
 
 .container {
     max-width: 600px;
@@ -57,7 +67,7 @@ header {
     }
 
 #name-box {
-    display: flex;
+        display: flex;
 }
 
     #name-box h4 {
@@ -67,10 +77,12 @@ header {
     }
 
     #name-box p {
-        font-size: 13px;
+        font-size: 13vw;
         color: #ccc;
         margin-top: 0px;
     }
+
+
 
 #tweet-box {
     margin-bottom: 10px;

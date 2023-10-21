@@ -71,7 +71,7 @@ class Stack:
 
 def is_balanced(expression):
     s = Stack()
-    for char in expression:
+    for char in expression: 
         if char == "(":
             s.push(char)
         elif char == ")":
@@ -95,18 +95,15 @@ Input string : hello world
 Input Keyword: word
 Output: -1 
 """
-def find_keyword(s, keyword):
-    len_s = len(s)
+def find_keyword(string, keyword):
+    len_string = len(string) 
     len_keyword = len(keyword)
 
-    for i in range(len_s - len_keyword + 1):
-        if s[i:i+len_keyword] == keyword:
-            return i
+    for i in range(len_string - len_keyword + 1):
+        if string[i:i+len_keyword] == keyword: 
+            return i 
 
     return -1
-
-print(find_keyword('hello world', 'world'))
-print(find_keyword('hello world', 'word')) 
 
 input_string = input("Input string: ")
 input_keyword = input("Input keyword: ")
