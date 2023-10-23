@@ -129,13 +129,31 @@ def welcome():
     time.sleep(1)
     clear()
 
+def layout(slot_one, slot_two, slot_three):
+    print('\n   __________________________________________')
+    print('  /                                         /|')
+    print(' /_________________________________________/ |')
+    print('|                                         |  |')
+    print('| STRAWBERRY x2  PLUM   x3   RASPBERRY x5 |  |')
+    print('| ORANGE     x8  BANANA x10  SEVENS   x15 |  |')
+    print('|                                         |  |')
+    print('|   -----------------------------------   |  |')
+    for l, m, r in zip(slot_one, slot_two, slot_three):
+        print(f'|  | {l[0]} x{l[1]} | {m[0]} x{m[1]} | {r[0]} x{r[1]} |  |  |')
+    print('|   -----------------------------------   |  |')
+    print(f'|   TOAL BET {cash.bet}               CREDIT {cash.credit}   |  |')
+    print('|                                         | /')
+    print('|_________________________________________|/')
+
+
 # Play the game
 if __name__ == '__main__':
     clear()
     welcome()
     
     while True:
-        print(f"\nCurrent Bet: {cash.bet}, Current Credit: {cash.credit}")
+        layout(slot_one, slot_two, slot_three)
+        """print(f"\nCurrent Bet: {cash.bet}, Current Credit: {cash.credit}")"""
         again = input("\nPress 'q' to quit or 'b' to change bet or 'a' to add money or any other key to spin: ")
         if again == 'q':
             break
