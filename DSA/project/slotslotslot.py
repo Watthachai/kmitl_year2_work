@@ -187,7 +187,7 @@ def layout():
 
 if __name__ == '__main__':
     clear()
-    #welcome()
+    welcome()
     layout()
     while True:
         """print(f"\nCurrent Bet: {cash.bet}, Current Credit: {cash.credit}")"""
@@ -208,25 +208,25 @@ if __name__ == '__main__':
         else:
             if not cash.charge():
                 clear()
-                for i in range(10):
+                for i in range(6):
                     slot_machine.print_loop_layout()
                     time.sleep(0.1)
                     clear()
-                for i in range(7):
+                for i in range(4):
                     slot_machine.print_loop_layout()
                     time.sleep(0.3)
                     clear()
-                for i in range(5):
+                for i in range(3):
                     slot_machine.print_loop_layout()
                     time.sleep(0.5)
                     clear()
-                for i in range(3):
+                for i in range(1):
                     slot_machine.print_loop_layout()
                     time.sleep(0.7)
                     clear()
                 for i in range(2):
                     slot_machine.print_loop_layout()
-                    time.sleep(0.9)
+                    time.sleep(0.8)
                     clear()        
                 slot_machine.play(cash)
                 
