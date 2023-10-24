@@ -81,7 +81,7 @@ class SlotMachine:
                 '\t|                                         |  |\n'
                 f'\t|   TOAL BET {cash.bet}               CREDIT {cash.credit} \n'
                 '\t|                                         |  |\n'
-                '\t|                                         | /\n'
+                '\t|                Spining...               | /\n'
                 '\t|_________________________________________|/')
         
         print(layout)
@@ -119,10 +119,7 @@ class SlotMachine:
             self.loss_count += 1  # Increment the loss counter after a loss
         print('\t|_________________________________________|/')
 
-            
 
-
-            
 # Define the symbols and multipliers
 strawberry = ("🍓", 2)
 banana = ("🍌", 10)
@@ -188,9 +185,6 @@ def layout():
                 '\t|_________________________________________|/'
         )
 
-
-
-# Play the game
 if __name__ == '__main__':
     clear()
     #welcome()
@@ -216,8 +210,24 @@ if __name__ == '__main__':
                 clear()
                 for i in range(10):
                     slot_machine.print_loop_layout()
-                    time.sleep(0.2)
+                    time.sleep(0.1)
                     clear()
+                for i in range(7):
+                    slot_machine.print_loop_layout()
+                    time.sleep(0.3)
+                    clear()
+                for i in range(5):
+                    slot_machine.print_loop_layout()
+                    time.sleep(0.5)
+                    clear()
+                for i in range(3):
+                    slot_machine.print_loop_layout()
+                    time.sleep(0.7)
+                    clear()
+                for i in range(2):
+                    slot_machine.print_loop_layout()
+                    time.sleep(0.9)
+                    clear()        
                 slot_machine.play(cash)
                 
     time.sleep(1)
