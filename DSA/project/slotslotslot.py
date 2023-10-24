@@ -65,6 +65,27 @@ class SlotMachine:
             # Otherwise, spin normally
             return [random.choices(reel, k=1)[0] for reel in self.reels]
 
+    def print_loop_layout(self):
+        result = self.spin()
+        
+        layout = ('\n\t   __________________________________________\n'
+                '\t  /                                         /|\n'
+                '\t /_________________________________________/ |\n'
+                '\t|                                         |  |\n'
+                '\t| STRAWBERRY x2  PLUM   x3   RASPBERRY x5 |  |\n'
+                '\t| ORANGE     x8  BANANA x10  SEVENS   x15 |  |\n'
+                '\t|                                         |  |\n'
+                '\t|   -----------------------------------   |  |\n'
+                f'\t|  |             {" ".join([res[0] for res in result])}              |  |  |\n'
+                '\t|   -----------------------------------   |  |\n'
+                '\t|                                         |  |\n'
+                f'\t|   TOAL BET {cash.bet}               CREDIT {cash.credit} \n'
+                '\t|                                         |  |\n'
+                '\t|                                         | /\n'
+                '\t|_________________________________________|/')
+        
+        print(layout)
+
     def play(self, cash):
         clear()
         result = self.spin()
@@ -79,8 +100,10 @@ class SlotMachine:
                 '\t|   -----------------------------------   |  |\n'
                 f'\t|  |             {" ".join([res[0] for res in result])}              |  |  |\n'
                 '\t|   -----------------------------------   |  |\n'
-                f'\t|   TOAL BET {cash.bet}               CREDIT {cash.credit}   |  |\n'
-                '\t|                                         |  |')
+                '\t|                                         |  |\n'
+                f'\t|   TOAL BET {cash.bet}               CREDIT {cash.credit} \n'
+                '\t|                                         |  |'
+                )
         
         print(layout)
         
@@ -88,13 +111,12 @@ class SlotMachine:
             symbol = result[0][0]
             multiplier = result[0][1]
             win_amount = cash.bet * multiplier  # Calculate win amount based on bet and multiplier
-            print(f"\t|     Congratulations! You won ${win_amount}!        | /")
+            print(f"\t|     Congratulations! You won ${win_amount}!        | |")
             cash.credit += win_amount
             self.loss_count = 0  # Reset the loss counter after a win
         else:
             print("\t|      Sorry, you lost. Try again!        | /")
             self.loss_count += 1  # Increment the loss counter after a loss
-
         print('\t|_________________________________________|/')
 
             
@@ -147,7 +169,7 @@ def welcome():
     time.sleep(1)
     clear()
 
-def layout():
+def layout(): 
     print('\n\t   __________________________________________')
     print('\t  /                                         /|')
     print('\t /_________________________________________/ |')
@@ -156,7 +178,15 @@ def layout():
                 '\t| STRAWBERRY x2  PLUM   x3   RASPBERRY x5 |  |\n'
                 '\t| ORANGE     x8  BANANA x10  SEVENS   x15 |  |\n'
                 '\t|                                         |  |\n'
-                '\t|   -----------------------------------   |  |\n')
+                '\t|   -----------------------------------   |  |\n'
+                f'\t|  |                                   |  |  |\n'
+                '\t|   -----------------------------------   |  |\n'
+                '\t|                                         |  |\n'
+                f'\t|   TOAL BET {cash.bet}               CREDIT {cash.credit}   \n'
+                '\t|                                         |  |\n'
+                '\t|                                         | /\n'
+                '\t|_________________________________________|/'
+        )
 
 
 
@@ -172,12 +202,22 @@ if __name__ == '__main__':
             break
         elif again == 'b':
             cash.change_bet()
+            clear()
+            layout()
         elif again == 'a':
             amount = int(input("Enter the amount of money you want to add: "))
             cash.credit += amount
             print(f"You added ${amount}. Your new credit is ${cash.credit}.")
+            time.sleep(1)
+            clear()
+            layout()
         else:
             if not cash.charge():
+                clear()
+                for i in range(10):
+                    slot_machine.print_loop_layout()
+                    time.sleep(0.2)
+                    clear()
                 slot_machine.play(cash)
                 
     time.sleep(1)
