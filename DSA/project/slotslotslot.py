@@ -68,18 +68,36 @@ class SlotMachine:
     def play(self, cash):
         clear()
         result = self.spin()
-        print("Result: ", [res[0] for res in result])
+        
+        layout = ('\n\t   __________________________________________\n'
+                '\t  /                                         /|\n'
+                '\t /_________________________________________/ |\n'
+                '\t|                                         |  |\n'
+                '\t| STRAWBERRY x2  PLUM   x3   RASPBERRY x5 |  |\n'
+                '\t| ORANGE     x8  BANANA x10  SEVENS   x15 |  |\n'
+                '\t|                                         |  |\n'
+                '\t|   -----------------------------------   |  |\n'
+                f'\t|  |             {" ".join([res[0] for res in result])}              |  |  |\n'
+                '\t|   -----------------------------------   |  |\n'
+                f'\t|   TOAL BET {cash.bet}               CREDIT {cash.credit}   |  |\n'
+                '\t|                                         |  |')
+        
+        print(layout)
+        
         if len(set([res[0] for res in result])) == 1:
             symbol = result[0][0]
             multiplier = result[0][1]
             win_amount = cash.bet * multiplier  # Calculate win amount based on bet and multiplier
-            print(f"Congratulations! You won ${win_amount}!")
+            print(f"\t|     Congratulations! You won ${win_amount}!        | /")
             cash.credit += win_amount
             self.loss_count = 0  # Reset the loss counter after a win
         else:
-            print("Sorry, you lost. Try again!")
+            print("\t|      Sorry, you lost. Try again!        | /")
             self.loss_count += 1  # Increment the loss counter after a loss
 
+        print('\t|_________________________________________|/')
+
+            
 
 
             
@@ -129,32 +147,27 @@ def welcome():
     time.sleep(1)
     clear()
 
-def layout(slot_one, slot_two, slot_three):
-    print('\n   __________________________________________')
-    print('  /                                         /|')
-    print(' /_________________________________________/ |')
-    print('|                                         |  |')
-    print('| STRAWBERRY x2  PLUM   x3   RASPBERRY x5 |  |')
-    print('| ORANGE     x8  BANANA x10  SEVENS   x15 |  |')
-    print('|                                         |  |')
-    print('|   -----------------------------------   |  |')
-    for l, m, r in zip(slot_one, slot_two, slot_three):
-        print(f'|  | {l[0]} x{l[1]} | {m[0]} x{m[1]} | {r[0]} x{r[1]} |  |  |')
-    print('|   -----------------------------------   |  |')
-    print(f'|   TOAL BET {cash.bet}               CREDIT {cash.credit}   |  |')
-    print('|                                         | /')
-    print('|_________________________________________|/')
+def layout():
+    print('\n\t   __________________________________________')
+    print('\t  /                                         /|')
+    print('\t /_________________________________________/ |')
+    print(
+                '\t|                                         |  |\n'
+                '\t| STRAWBERRY x2  PLUM   x3   RASPBERRY x5 |  |\n'
+                '\t| ORANGE     x8  BANANA x10  SEVENS   x15 |  |\n'
+                '\t|                                         |  |\n'
+                '\t|   -----------------------------------   |  |\n')
+
 
 
 # Play the game
 if __name__ == '__main__':
     clear()
-    welcome()
-    
+    #welcome()
+    layout()
     while True:
-        layout(slot_one, slot_two, slot_three)
         """print(f"\nCurrent Bet: {cash.bet}, Current Credit: {cash.credit}")"""
-        again = input("\nPress 'q' to quit or 'b' to change bet or 'a' to add money or any other key to spin: ")
+        again = input("\nPress 'q' to quit\n      'b' to change bet \n      'a' to add money \nPress other key to spin: ")
         if again == 'q':
             break
         elif again == 'b':
